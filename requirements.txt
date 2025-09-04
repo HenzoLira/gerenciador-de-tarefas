@@ -12,6 +12,7 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.2
 packaging==25.0
+psycopg2-binary==2.9.10
 pycparser==2.22
 SQLAlchemy==2.0.43
 typing_extensions==4.15.0
