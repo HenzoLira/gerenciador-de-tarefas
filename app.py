@@ -161,7 +161,7 @@ def admin_dashboard():
 # --- Comandos CLI para o Render ---
 """@app.cli.command("create-admin")
 def create_admin():
-    """Cria um usuário administrador padrão."""
+    # Cria um usuário administrador padrão.
     with app.app_context():
         # Verifica se já existe um usuário com o email de admin
         existing_user = User.query.filter_by(email='admin@admin.com').first()
