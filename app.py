@@ -159,7 +159,7 @@ def admin_dashboard():
     return render_template('admin.html', tasks=tasks)
 
 # --- Comandos CLI para o Render ---
-@app.cli.command("create-admin")
+"""@app.cli.command("create-admin")
 def create_admin():
     """Cria um usuário administrador padrão."""
     with app.app_context():
@@ -174,7 +174,7 @@ def create_admin():
             print("Usuário administrador criado com sucesso!")
         else:
             print("Usuário administrador já existe.")
-
+"""
 # --- Execução da Aplicação ---
 if __name__ == '__main__':
     app.run(debug=True)
