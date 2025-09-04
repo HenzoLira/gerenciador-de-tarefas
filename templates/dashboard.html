@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="dashboard-layout">
+    <div class="form-column">
+        <h3>Adicionar Nova Tarefa</h3>
+        <form action="{{ url_for('add_task') }}" method="POST">
+            <div class="form-group">
+                <label for="title">Título</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descrição (Opcional)</label>
+                <textarea id="description" name="description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="due_date">Data de Entrega (Opcional)</label>
+                <input type="date" id="due_date" name="due_date">
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Tarefa</button>
+        </form>
+    </div>
+    <div class="tasks-column">
+        <h3>Suas Tarefas</h3>
+        {% if tasks %}
+            <ul class="task-list">
+                {% for task in tasks %}
+                    <li class="task-item">
+                        <div class="task-info">
+                            <h5>{% if task.status == 'concluída' %}<del>{{ task.title }}</del>{% else %}{{ task.title }}{% endif %}</h5>
+                            <p>{{ task.description or '' }}</p>
+                            <small>{% if task.due_date %}Entrega: {{ task.due_date.strftime('%d/%m/%Y') }}{% endif %}</small>
+                        </div>
+                        <div class="task-actions">
+                            {% if task.status == 'pendente' %}
+                            <a href="{{ url_for('update_task', task_id=task.id) }}" class="btn btn-success" title="Concluir">✓</a>
+                            {% endif %}
+                            <a href="{{ url_for('edit_task', task_id=task.id) }}" class="btn btn-secondary" title="Editar">✎</a>
+                            <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger" title="Excluir">🗑</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-info">
+                Você ainda não tem nenhuma tarefa.
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

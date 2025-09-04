@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Painel Admin{% endblock %}
+{% block content %}
+<h2>Todas as Tarefas do Sistema</h2>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>ID da Tarefa</th>
+            <th>Título</th>
+            <th>Status</th>
+            <th>Dono (Usuário)</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.owner.username }} ({{ task.owner.email }})</td>
+            <td>
+                <a href="{{ url_for('delete_task', task_id=task.id) }}" class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="5" style="text-align: center;">Nenhuma tarefa no sistema.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
